@@ -1,15 +1,15 @@
 {
-  "vendors.js": "/react-structured-query-search/static/js/vendors.5241e7bd.js",
-  "vendors.js.map": "/react-structured-query-search/static/js/vendors.ecc5f172f89215a6f7c6.js.map",
-  "resources-gettingstarted~resources-props.js": "/react-structured-query-search/static/js/resources-gettingstarted~resources-props.499141c9.js",
-  "resources-gettingstarted~resources-props.js.map": "/react-structured-query-search/static/js/resources-gettingstarted~resources-props.ecc5f172f89215a6f7c6.js.map",
-  "app.js": "/react-structured-query-search/static/js/app.ecc5f172f89215a6f7c6.js",
-  "app.js.map": "/react-structured-query-search/static/js/app.ecc5f172f89215a6f7c6.js.map",
-  "resources-gettingstarted.js": "/react-structured-query-search/static/js/resources-gettingstarted.21d90c1f.js",
-  "resources-gettingstarted.js.map": "/react-structured-query-search/static/js/resources-gettingstarted.ecc5f172f89215a6f7c6.js.map",
-  "resources-introduction.js": "/react-structured-query-search/static/js/resources-introduction.5a2b85f1.js",
-  "resources-introduction.js.map": "/react-structured-query-search/static/js/resources-introduction.ecc5f172f89215a6f7c6.js.map",
-  "resources-props.js": "/react-structured-query-search/static/js/resources-props.d789b941.js",
-  "resources-props.js.map": "/react-structured-query-search/static/js/resources-props.ecc5f172f89215a6f7c6.js.map",
-  "index.html": "/react-structured-query-search/index.html"
+  "vendors.js": "/react-structured-query-search-with-suggestions/static/js/vendors.494a1d4e.js",
+  "vendors.js.map": "/react-structured-query-search-with-suggestions/static/js/vendors.dbba8d854c4aa4086740.js.map",
+  "resources-gettingstarted~resources-props.js": "/react-structured-query-search-with-suggestions/static/js/resources-gettingstarted~resources-props.499141c9.js",
+  "resources-gettingstarted~resources-props.js.map": "/react-structured-query-search-with-suggestions/static/js/resources-gettingstarted~resources-props.dbba8d854c4aa4086740.js.map",
+  "app.js": "/react-structured-query-search-with-suggestions/static/js/app.dbba8d854c4aa4086740.js",
+  "app.js.map": "/react-structured-query-search-with-suggestions/static/js/app.dbba8d854c4aa4086740.js.map",
+  "resources-gettingstarted.js": "/react-structured-query-search-with-suggestions/static/js/resources-gettingstarted.21d90c1f.js",
+  "resources-gettingstarted.js.map": "/react-structured-query-search-with-suggestions/static/js/resources-gettingstarted.dbba8d854c4aa4086740.js.map",
+  "resources-introduction.js": "/react-structured-query-search-with-suggestions/static/js/resources-introduction.5a2b85f1.js",
+  "resources-introduction.js.map": "/react-structured-query-search-with-suggestions/static/js/resources-introduction.dbba8d854c4aa4086740.js.map",
+  "resources-props.js": "/react-structured-query-search-with-suggestions/static/js/resources-props.d789b941.js",
+  "resources-props.js.map": "/react-structured-query-search-with-suggestions/static/js/resources-props.dbba8d854c4aa4086740.js.map",
+  "index.html": "/react-structured-query-search-with-suggestions/index.html"
 }
