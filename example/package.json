@@ -10,7 +10,7 @@
     "react": "^16.4.1",
     "react-dom": "^16.4.1",
     "react-scripts": "^1.1.4",
-    "react-structured-query-search-with-suggestions": "file:.."
+    "react-structured-query-search-with-suggestions": "^1.0.1"
   },
   "scripts": {
     "start": "react-scripts start",

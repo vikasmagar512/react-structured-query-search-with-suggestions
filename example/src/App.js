@@ -1,7 +1,7 @@
 import React, { Component } from "react";
 
 import ReactStructuredQuerySearch from "react-structured-query-search-with-suggestions";
-import "react-structured-query-search/dist/index.css";
+import "react-structured-query-search-with-suggestions/dist/index.css";
 
 export default class App extends Component {
 	constructor(props) {

@@ -8,6 +8,12 @@ import svgr from "@svgr/rollup";
 
 import pkg from "./package.json";
 
+const globals={
+  'react': 'React',
+  'react-dom': 'ReactDOM',
+  'prop-types': 'PropTypes'
+}
+
 export default {
   input: "src/ReactStructuredQuerySearch.js",
   output: [
@@ -15,14 +21,16 @@ export default {
       file: pkg.main,
       format: "umd",
       name: "ReactStructuredQuerySearch",
-      sourcemap: true
+      sourcemap: true,
+      exports: 'named', 
     },
     {
       file: pkg.module,
       format: "es",
-      sourcemap: true
+      sourcemap: true,
+      exports: 'named', 
     }
-  ],
+  ].map(out => ({ ...out, globals})),
   plugins: [
     external(),
     postcss({

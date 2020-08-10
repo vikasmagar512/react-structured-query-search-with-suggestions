@@ -14,7 +14,7 @@
     "docz-theme-default": "^1.2.0"
   },
   "dependencies": {
-    "react-structured-query-search": "file:..",
+    "react-structured-query-search-with-suggestions": "file:..",
     "@babel/core": "^7.0.0",
     "@babel/plugin-proposal-class-properties": "^7.0.0",
     "@babel/plugin-proposal-decorators": "^7.0.0",
