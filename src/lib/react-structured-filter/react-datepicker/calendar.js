@@ -3,12 +3,20 @@ import React, { Component } from "react";
 import Day from "./day";
 import DateUtil from "./util/date";
 import moment from "moment";
+import InputTime from './inputTime'
 
+import getHours from "date-fns/getHours";
+import getMinutes from "date-fns/getMinutes";
+import getSeconds from "date-fns/getSeconds";
+import {isValid, addZero} from './util'
 class Calendar extends Component {
   constructor(props) {
     super(props);
+    const time = new Date(this.props.selected);
+    const validDate =  new DateUtil(isValid(time) ? this.props.selected : moment()).safeClone(moment())
     this.state = {
-      date: new DateUtil(this.props.selected).safeClone(moment())
+      date: validDate,
+      selected: validDate
     };
   }
 
@@ -34,7 +42,9 @@ class Calendar extends Component {
   }
 
   handleDayClick(day) {
-    this.props.onSelect(day);
+    this.setState({
+      selected: day
+    })
   }
 
   renderWeek = (weekStart, key) => {
@@ -56,7 +66,7 @@ class Calendar extends Component {
         day={day}
         date={this.state.date}
         onClick={this.handleDayClick.bind(this, day)}
-        selected={new DateUtil(this.props.selected)}
+        selected={this.state.selected}
         disabled={disabled}
       />
     );
@@ -66,7 +76,23 @@ class Calendar extends Component {
     return weekStart.mapDaysInWeek(this.renderDay);
   }
 
+  handleTimeChange = time => {
+    this.setState({
+      selected: this.state.selected.set({
+        hour:getHours(time),
+        minute:getMinutes(time),
+        second:getSeconds(time),
+      })
+    });
+  };
+
   render() {
+    const time = new Date(this.state.selected._date);
+    const timeValid = isValid(time) && Boolean(this.state.selected);
+    const timeString = timeValid
+      ? `${addZero(time.getHours())}:${addZero(time.getMinutes())}:${addZero(time.getSeconds())}`
+      : "";
+    const timeInputLabel = 'Time:'
     return (
       <div className="datepicker">
         <div className="datepicker__triangle" />
@@ -85,6 +111,16 @@ class Calendar extends Component {
           </div>
         </div>
         <div className="datepicker__month">{this.weeks()}</div>
+        <div className={'datepicker__time--action'}>
+          <InputTime
+            timeString={timeString}
+            timeInputLabel={timeInputLabel}
+            onChange={this.handleTimeChange}
+          />
+          <div className="datepicker__action">
+            <button onClick={()=>this.props.onSelect(this.state.selected.moment())}>Submit</button>
+          </div>
+        </div>
       </div>
     );
   }

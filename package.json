@@ -1,10 +1,10 @@
 {
-  "name": "react-structured-query-search",
-  "version": "1.0.0-alpha.5",
-  "description": "react-structured-query-search",
-  "author": "kevalbhatt",
+  "name": "react-structured-query-search-with-suggestions",
+  "version": "1.0.0",
+  "description": "react-structured-query-search with the provision to load incremental suggestions from the rest api",
+  "author": "vikasmagar512",
   "license": "MIT",
-  "repository": "kevalbhatt/react-structured-query-search",
+  "repository": "vikasmagar512/react-structured-query-search-with-suggestions",
   "main": "dist/index.js",
   "module": "dist/index.es.js",
   "jsnext:main": "dist/index.es.js",
@@ -59,10 +59,12 @@
     "dist"
   ],
   "dependencies": {
+    "bootstrap": "^4.5.0",
     "classnames": "^2.2.6",
     "fuzzy": "^0.1.3",
     "moment": "^2.24.0",
     "node-sass": "^4.12.0",
+    "react-datepicker": "^3.1.3",
     "react-onclickoutside": "^6.8.0",
     "tether": "^1.4.6"
   }

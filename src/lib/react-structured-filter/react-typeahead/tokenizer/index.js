@@ -93,8 +93,8 @@ export default class TypeaheadTokenizer extends Component {
   _getOptionsForTypeahead() {
     if (this.state.category == "") {
       var categories = [];
-      for (var i = 0; i < this.state.options.length; i++) {
-        categories.push(this.state.options[i].category);
+      for (var i = 0; i < this.props.options.length; i++) {
+        categories.push(this.props.options[i].category);
       }
       return categories;
     } else if (this.state.operator == "") {
@@ -115,7 +115,7 @@ export default class TypeaheadTokenizer extends Component {
       else return options();
     }
 
-    return this.state.options;
+    return this.props.options;
   }
 
   _getHeader() {
@@ -127,7 +127,7 @@ export default class TypeaheadTokenizer extends Component {
       return "Value";
     }
 
-    return this.state.options;
+    return this.props.options;
   }
 
   _getCategoryType() {
@@ -139,9 +139,9 @@ export default class TypeaheadTokenizer extends Component {
   }
 
   _getCategoryOptions() {
-    for (var i = 0; i < this.state.options.length; i++) {
-      if (this.state.options[i].category == this.state.category) {
-        return this.state.options[i].options;
+    for (var i = 0; i < this.props.options.length; i++) {
+      if (this.props.options[i].category == this.state.category) {
+        return this.props.options[i].options;
       }
     }
   }

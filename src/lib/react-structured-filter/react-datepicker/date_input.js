@@ -2,8 +2,6 @@ import React, { Component } from "react";
 import propTypes from "prop-types";
 import moment from "moment";
 
-import DateUtil from "./util/date";
-
 export default class DateInput extends Component {
   static propTypes = {
     onKeyDown: propTypes.func
@@ -12,15 +10,6 @@ export default class DateInput extends Component {
   constructor(props) {
     super(props);
     this.entryRef = null;
-    this.state = {
-      dateFormat: "YYYY-MM-DD"
-    };
-  }
-
-  getInitialState() {
-    return {
-      value: this.safeDateFormat(this.props.date)
-    };
   }
 
   componentDidMount() {
@@ -29,10 +18,6 @@ export default class DateInput extends Component {
 
   componentWillReceiveProps(newProps) {
     this.toggleFocus(newProps.focus);
-
-    this.setState({
-      value: this.safeDateFormat(newProps.date)
-    });
   }
 
   toggleFocus(focus) {
@@ -46,9 +31,7 @@ export default class DateInput extends Component {
   handleChange = event => {
     var date = moment(event.target.value, this.props.dateFormat, true);
 
-    this.setState({
-      value: event.target.value
-    });
+    this.props.setSelected(date)
   };
 
   safeDateFormat(date) {
@@ -56,16 +39,13 @@ export default class DateInput extends Component {
   }
 
   isValueAValidDate() {
-    var date = moment(event.target.value, this.props.dateFormat, true);
+    var date = moment(this.props.date, this.props.dateFormat, true);
 
     return date.isValid();
   }
 
-  handleEnter(event) {
-    if (this.isValueAValidDate()) {
-      var date = moment(event.target.value, this.props.dateFormat, true);
-      this.props.setSelected(new DateUtil(date));
-    }
+  handleEnter() {
+    this.props.handleEnter()
   }
 
   handleKeyDown = event => {
@@ -85,11 +65,12 @@ export default class DateInput extends Component {
   };
 
   render() {
+    const date = this.safeDateFormat(this.props.date)
     return (
       <input
         ref={ref => (this.entryRef = ref)}
         type="text"
-        value={this.state.value}
+        value={date}
         onClick={this.handleClick}
         onKeyDown={this.handleKeyDown}
         onFocus={this.props.onFocus}

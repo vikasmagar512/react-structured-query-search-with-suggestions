@@ -1,27 +1,25 @@
 import React, { Component } from "react";
 
-import ReactStructuredQuerySearch from "react-structured-query-search";
+import ReactStructuredQuerySearch from "react-structured-query-search-with-suggestions";
 import "react-structured-query-search/dist/index.css";
 
 export default class App extends Component {
 	constructor(props) {
 		super(props);
-		this.state = {
-			SymbolData: []
-		};
 		// NOTE: The operator will seen to UI only if props isAllowOperator={true}
-		this.options = [
+		this.state={
+			options :[
+			{
+				category: "Date",
+				type: "date",
+				isAllowDuplicateCategories: false,
+				operator: () => ["=", "!="]
+			},
 			{
 				category: "Symbol",
 				type: "textoptions",
 				operator: ["==", "!="],
-				options: this.getSymbolOptions
-			},
-			{
-				category: "Name",
-				type: "text",
-				isAllowDuplicateCategories: false,
-				operator: () => ["==", "!==", "containes"]
+				options: ['example1', 'example2']
 			},
 			{ category: "Price", type: "number" },
 			{ category: "MarketCap", type: "number" },
@@ -40,26 +38,33 @@ export default class App extends Component {
 				isAllowCustomValue: false,
 				options: this.getIndustryOptions
 			}
-		];
+		]
+	}
+	this.searchCharacters = this.searchCharacters.bind(this)
+
 	}
 
-	/**
-	 * [getSymbolOptions Get the values using Ajax call]
-	 * @return {[type]}
-	 */
-	getSymbolOptions = () => {
-		if (this.state.SymbolData.length === 0) {
-			return new Promise((resolve, reject) => {
-				setTimeout(() => {
-					this.setState({ SymbolData: ["TFSC", "PIL", "VNET"] }, () => {
-						return resolve(this.state.SymbolData);
-					});
-				}, 2000);
-			});
-		} else {
-			return this.state.SymbolData;
+	// API search function
+	searchCharacters(category, search) {
+		const searchTerm = search !=='' ? search : 'demo'
+		fetch(
+		`https://api.github.com/search/users?q=${searchTerm}`,
+		{
+			method: 'GET'
 		}
-	};
+		)
+		.then(r => r.json())
+		.then(r => {
+			const logins = r.items.map(r=>r.login)
+			this.setState({options: this.state.options.map(item=>{
+				return item.category===category ? {...item, options:logins} : item 
+			})})
+		})
+		.catch(error => {
+			console.error(error);
+			return [];
+		});
+	}
 
 	/**
 	 * [getSectorOptions Get the values for sector category]
@@ -91,7 +96,7 @@ export default class App extends Component {
 						{ category: "Sector", value: { sectorName: "Consumer Services", id: 2 } },
 						{ category: "Industry", value: { name: "Other Specialty Stores", id: 2 } }
 					]}
-					options={this.options}
+					options={this.state.options}
 					//renderTokenItem={this.getTokenItem}
 					updateOptions={({ updatedValues, addedValue }) => {
 						if (addedValue && addedValue.category === "Symbol" && addedValue.value === "TFSC") {
@@ -108,6 +113,7 @@ export default class App extends Component {
 						results: "filter-tokenizer-list__container",
 						listItem: "filter-tokenizer-list__item"
 					}}
+					fetchData={this.searchCharacters}
 				/>
 			</div>
 		);

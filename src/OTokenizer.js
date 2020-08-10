@@ -1,6 +1,5 @@
-import React, { Component } from "react";
+import React from "react";
 import ReactDOM from "react-dom";
-import PropTypes from "prop-types";
 import { Tokenizer } from "./lib/react-structured-filter/react-typeahead/react-typeahead";
 import Typeahead from "./OTypeahead";
 
@@ -45,11 +44,11 @@ export default class OTokenizer extends Tokenizer {
 			let node = ReactDOM.findDOMNode(this);
 			if (
 				(node && node.contains(e.target)) ||
-				((e.target && e.target.className == "typeahead-option") || e.target.className == "typeahead-token-close")
+				((e.target && e.target.closest(".typeahead-option")) || e.target.className == "typeahead-token-close")
 			) {
 				return;
 			}
-			if (this.state.focused === true && !this.typeaheadRef.isOptionsLoading()) {
+			if (this.state.focused===true) {
 				this.setState({ focused: false });
 			}
 		}
@@ -60,9 +59,9 @@ export default class OTokenizer extends Tokenizer {
 	};
 
 	_getCategoryOperator() {
-		for (var i = 0; i < this.state.options.length; i++) {
-			if (this.state.options[i].category == this.state.category) {
-				return this.state.options[i].operator;
+		for (var i = 0; i < this.props.options.length; i++) {
+			if (this.props.options[i].category == this.state.category) {
+				return this.props.options[i].operator;
 			}
 		}
 	}
@@ -70,8 +69,8 @@ export default class OTokenizer extends Tokenizer {
 	_getOptionsForTypeahead() {
 		if (this.state.category == "") {
 			var categories = [];
-			for (var i = 0; i < this.state.options.length; i++) {
-				let options = this.state.options[i],
+			for (var i = 0; i < this.props.options.length; i++) {
+				let options = this.props.options[i],
 					category = options.category,
 					isAllowCustomValue = options.isAllowCustomValue == undefined ? false : options.isAllowCustomValue,
 					isAllowDuplicateCategories = options.isAllowDuplicateCategories == undefined ? true : options.isAllowDuplicateCategories;
@@ -114,7 +113,7 @@ export default class OTokenizer extends Tokenizer {
 		} else {
 			return this._getOptions({ options: this._getCategoryOptions() });
 		}
-		return this.state.options;
+		return this.props.options;
 	}
 
 	_getOptions(optionsObj) {
@@ -125,11 +124,7 @@ export default class OTokenizer extends Tokenizer {
 			if (typeof options === "function") {
 				let opt = options();
 				if (typeof opt == "object") {
-					if (opt instanceof Promise) {
-						return opt;
-					} else {
-						return this.filterOptionsValue(Object.assign(optionsObj, { options: opt }));
-					}
+					return this.filterOptionsValue(Object.assign(optionsObj, { options: opt }));
 				}
 			} else {
 				return this.filterOptionsValue(optionsObj);
@@ -197,10 +192,10 @@ export default class OTokenizer extends Tokenizer {
 		} else {
 			return this.props.valueHeader || "Value";
 		}
-		return this.state.options;
+		return this.props.options;
 	}
 
-	_getAllowDuplicateCategories({ category, options = this.state.options }) {
+	_getAllowDuplicateCategories({ category, options = this.props.options }) {
 		if (category) {
 			for (var i = 0; i < options.length; i++) {
 				if (options[i].category == category) {
@@ -212,7 +207,7 @@ export default class OTokenizer extends Tokenizer {
 		}
 	}
 
-	_getAllowDuplicateOptions({ category, options = this.state.options }) {
+	_getAllowDuplicateOptions({ category, options = this.props.options }) {
 		if (category) {
 			for (var i = 0; i < options.length; i++) {
 				if (options[i].category == category) {
@@ -224,7 +219,7 @@ export default class OTokenizer extends Tokenizer {
 		}
 	}
 
-	_getAllowCustomValue({ category, options = this.state.options }) {
+	_getAllowCustomValue({ category, options = this.props.options }) {
 		if (category) {
 			for (var i = 0; i < options.length; i++) {
 				if (options[i].category == category) {
@@ -236,7 +231,7 @@ export default class OTokenizer extends Tokenizer {
 		}
 	}
 
-	_getFuzzySearchKeyAttribute({ category, options = this.state.options }) {
+	_getFuzzySearchKeyAttribute({ category, options = this.props.options }) {
 		for (var i = 0; i < options.length; i++) {
 			if (options[i].category == category) {
 				return options[i].fuzzySearchKeyAttribute || "name";
@@ -396,6 +391,7 @@ export default class OTokenizer extends Tokenizer {
 				onOptionSelected={this._addTokenForValue}
 				onKeyDown={this._onKeyDown}
 				fromTokenizer={true}
+				fetchData={(searchString)=>{this.props.fetchData(this.state.category, searchString)}}
 			/>
 		);
 	}

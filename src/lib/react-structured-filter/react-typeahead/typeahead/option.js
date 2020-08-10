@@ -9,7 +9,7 @@ export default class TypeaheadOption extends Component {
   static propTypes = {
     customClasses: propTypes.object,
     onClick: propTypes.func,
-    children: propTypes.string
+    children: propTypes.oneOfType([propTypes.string, propTypes.object])
   };
 
   static defaultProps = {

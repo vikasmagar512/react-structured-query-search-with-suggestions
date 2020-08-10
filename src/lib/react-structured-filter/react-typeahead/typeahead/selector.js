@@ -94,7 +94,7 @@ export default class TypeaheadSelector extends Component {
 
   getSearchItem(item) {
     if (this.props.renderSearchItem) {
-      this.props.renderSearchItem(item);
+      return this.props.renderSearchItem(item);
     } else {
       if (typeof item == "object") {
         let attr = this.props.fuzzySearchKeyAttribute;

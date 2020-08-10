@@ -29,7 +29,8 @@ export default class Typeahead extends Component {
     defaultValue: propTypes.string,
     placeholder: propTypes.string,
     onOptionSelected: propTypes.func,
-    onKeyDown: propTypes.func
+    onKeyDown: propTypes.func,
+    fetchData: propTypes.func
   };
 
   static defaultProps = {
@@ -57,7 +58,6 @@ export default class Typeahead extends Component {
     this.inputRef = null;
     this.state = {
       // The set of all options... Does this need to be state?  I guess for lazy load...
-      loadingOptions: false,
       options: this.props.options,
       header: this.props.header,
       datatype: this.props.datatype,
@@ -184,6 +184,10 @@ export default class Typeahead extends Component {
       visible: this.getOptionsForValue(value, this.state.options),
       selection: null,
       entryValue: value
+    },()=>{
+      if(this.props.fetchData && this.state.datatype ==='textoptions'){
+        this.props.fetchData(value)
+      }
     });
   };
 
@@ -268,7 +272,7 @@ export default class Typeahead extends Component {
   }
 
   _handleDateChange = date => {
-    this.props.onOptionSelected(date.format("YYYY-MM-DD"));
+    this.props.onOptionSelected(date.format("YYYY-MM-DD HH:mm:ss"));
   };
 
   _showDatePicker() {
@@ -320,8 +324,7 @@ export default class Typeahead extends Component {
           <DatePicker
             isAllowOperator={this.props.isAllowOperator}
             ref={ref => (this.datepickerRef = ref)}
-            dateFormat={"YYYY-MM-DD"}
-            selected={moment()}
+            dateFormat={"YYYY-MM-DD HH:mm:ss"}
             onChange={this._handleDateChange}
             onKeyDown={this._onKeyDown}
           />

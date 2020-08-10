@@ -2,9 +2,9 @@ import React, { Component } from "react";
 import propTypes from "prop-types";
 
 import Popover from "./popover";
-import DateUtil from "./util/date";
 import Calendar from "./calendar";
 import DateInput from "./date_input";
+import moment from 'moment'
 
 export default class DatePicker extends Component {
   static propTypes = {
@@ -16,7 +16,9 @@ export default class DatePicker extends Component {
     super(props);
     this.dateinputRef = null;
     this.state = {
-      focus: true
+      focus: true,
+      showCalender:true,
+      selected:moment()
     };
   }
 
@@ -28,9 +30,14 @@ export default class DatePicker extends Component {
 
   hideCalendar = () => {
     this.setState({
-      focus: false
+      focus: true,
+      showCalender:false
     });
   };
+
+  handleSubmit=()=>{
+    this.props.onChange(this.state.selected);
+  }
 
   handleSelect = date => {
     this.hideCalendar();
@@ -38,21 +45,22 @@ export default class DatePicker extends Component {
   };
 
   setSelected = date => {
-    this.props.onChange(date.moment());
+    this.setState({selected:date})
   };
 
   onInputClick = () => {
     this.setState({
-      focus: true
+      focus: true,
+      showCalender:true
     });
   };
 
   calendar() {
-    if (this.state.focus) {
+    if (this.state.focus && this.state.showCalender) {
       return (
         <Popover>
           <Calendar
-            selected={this.props.selected}
+            selected={this.state.selected}
             onSelect={this.handleSelect}
             hideCalendar={this.hideCalendar}
             minDate={this.props.minDate}
@@ -68,13 +76,13 @@ export default class DatePicker extends Component {
       <div>
         <DateInput
           ref={ref => (this.dateinputRef = ref)}
-          date={this.props.selected}
+          date={this.state.selected}
           dateFormat={this.props.dateFormat}
           focus={this.state.focus}
           onFocus={this.handleFocus}
           onKeyDown={this.props.onKeyDown}
           handleClick={this.onInputClick}
-          handleEnter={this.hideCalendar}
+          handleEnter={this.handleSubmit}
           setSelected={this.setSelected}
           hideCalendar={this.hideCalendar}
           placeholderText={this.props.placeholderText}

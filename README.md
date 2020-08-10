@@ -1,10 +1,10 @@
-# react-structured-query-search 🎉
+# react-structured-query-search-with-suggestions 🎉
 
-[![NPM](https://img.shields.io/npm/v/react-structured-query-search.svg)](https://www.npmjs.com/package/react-structured-query-search) [![JavaScript Style Guide](https://img.shields.io/badge/code_style-standard-brightgreen.svg)](https://standardjs.com)
+[![NPM](https://img.shields.io/npm/v/react-structured-query-search.svg)](https://www.npmjs.com/package/react-structured-query-search-with-suggestions) [![JavaScript Style Guide](https://img.shields.io/badge/code_style-standard-brightgreen.svg)](https://standardjs.com)
 
-react-structured-query-search is a javascript library that provides autocomplete search queries.  
+react-structured-query-search-with-suggestions is a javascript library that provides autocomplete search queries.  
 This was inspired by [visualsearch](http://documentcloud.github.io/visualsearch) and
-[react-structured-filter](https://github.com/SummitRoute/react-structured-filter)
+[react-structured-query-search](https://github.com/kevalbhatt/react-structured-query-search)
 
 >This plugin is written on top of [react-structured-filter](https://github.com/SummitRoute/react-structured-filter), which has been revamped to add React 16 support and the existing code has been overriden to support New features.
 
@@ -12,7 +12,7 @@ You can use all the [react-typeahead](https://github.com/fmoo/react-typeahead), 
 
 ## 🎉🎊 New Features 🎊🎉
 
-* Ajax support to retrieve values.
+* Ajax support to retrieve values incrementally as the user types
 * Allows user to send values for Category in `Array<String>` or `Array<Object>`
 * Allows user to pass custom loader component.
 * Allows user to customize the header of dropdown (categories, operators, values).
@@ -23,36 +23,36 @@ You can use all the [react-typeahead](https://github.com/fmoo/react-typeahead), 
 * Allows user to send custom operators list.
 * Allows user to render custom tag(token) Component or the tag(token) Item.
 * Allows user to update Options(props) on runtime.
-
+* Allows user to set date with time (hh mm ss)
 
 
 ## Install
 
 ```bash
-npm install --save react-structured-query-search
+npm install --save react-structured-query-search-with-suggestions
 ```
 
-## Usage ([Example Code](https://github.com/kevalbhatt/react-structured-query-search/blob/master/example/src/App.js)) ([Demo](https://kevalbhatt.github.io/react-structured-query-search/))
+## Usage ([Example Code](https://github.com/vikasmagar512/react-structured-query-search-with-suggestions/blob/master/example/src/App.js)) ([Demo](https://vikasmagar512.github.io/react-structured-query-search-with-suggestions/))
 
 If you want to use `Tokenizer` then you either import as follows:
 
 ```jsx
-import ReactStructuredQuerySearch from "react-structured-query-search";
-import "react-structured-query-search/dist/index.css";
+import ReactStructuredQuerySearch from "react-structured-query-search-with-suggestions";
+import "react-structured-query-search-with-suggestions/dist/index.css";
 ```
 #### or
 
 ```jsx
-import {Tokenizer} from "react-structured-query-search";
-import "react-structured-query-search/dist/index.css";
+import {Tokenizer} from "react-structured-query-search-with-suggestions";
+import "react-structured-query-search-with-suggestions/dist/index.css";
 ```
 ---
 
 If you want to use `Typeahead` then you have to import as follows:
 
 ```jsx
-import {Typeahead} from "react-structured-query-search";
-import "react-structured-query-search/dist/index.css";
+import {Typeahead} from "react-structured-query-search-with-suggestions";
+import "react-structured-query-search-with-suggestions/dist/index.css";
 ```
 
 # API
@@ -117,4 +117,4 @@ Now, anytime you make a change to your library in src/ or to the example app's e
 
 ## License
 
-MIT © [kevalbhatt](https://github.com/kevalbhatt)
+MIT © [vikasmagar512](https://github.com/vikasmagar512)

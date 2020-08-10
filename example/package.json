@@ -1,7 +1,7 @@
 {
-  "name": "react-structured-query-search-example",
-  "homepage": "https://kevalbhatt.github.io/react-structured-query-search",
-  "version": "1.0.0-alpha",
+  "name": "react-structured-query-search-with-suggestions-example",
+  "homepage": "https://vikasmagar512.github.io/react-structured-query-search-with-suggestions",
+  "version": "1.0.0",
   "license": "MIT",
   "private": true,
   "dependencies": {
@@ -10,13 +10,13 @@
     "react": "^16.4.1",
     "react-dom": "^16.4.1",
     "react-scripts": "^1.1.4",
-    "react-structured-query-search": "file:.."
+    "react-structured-query-search-with-suggestions": "file:.."
   },
   "scripts": {
     "start": "react-scripts start",
     "build": "react-scripts build",
     "test": "react-scripts test --env=jsdom",
     "eject": "react-scripts eject",
-    "link": "ln -s ../.. ./node_modules/react-structured-query-search"
+    "link": "ln -s ../.. ./node_modules/react-structured-query-search-with-suggestions"
   }
 }
