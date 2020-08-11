@@ -99,6 +99,7 @@
 	position: relative;
 	display: flex;
 	align-items: center;
+
 	&.disabled {
 		opacity: 0.5;
 		.typeahead-token-close,
@@ -106,6 +107,16 @@
 			display: none;
 		}
 	}
+	.typeahead-token-close{
+		font-size:15px;
+	}
+	.typeahead-token{
+		.typeahead-token-close{
+			margin-left: 15px;
+			font-size:15px;
+		}
+	}
+
 	&.padding-for-clear-all {
 		width: calc(100% - 16px);
 		padding: 16px;
@@ -117,9 +128,9 @@
 	}
 	.clear-all {
 		position: absolute;
-		width: 13px;
-		right: 0;
-		top: calc(50% - 10px);
+		width: unset;
+		right: 12px;
+		top: calc(50% - 8px);
 	}
 	.input-group-addon {
 		border: 0;
@@ -189,7 +200,8 @@
 				color: $black;
 				padding: 5px;
 				width: calc(100% - 10px);
-				display: block;
+				display: flex;
+				justify-content: space-between;
 				&:hover {
 					@extend %extend_2;
 				}

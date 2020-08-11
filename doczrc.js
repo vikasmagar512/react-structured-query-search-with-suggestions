@@ -4,5 +4,17 @@ module.exports = {
 		showPlaygroundEditor: true
 	},
 	base: "/react-structured-query-search-with-suggestions/",
-	menu: ["Introduction", "Getting Started", "Props"]
+	menu: ["Introduction", "Getting Started", "Props"],
+	onCreateWebpackChain: (config) => {
+		// Allow CSS imports
+		config.module
+		  .rule('scss')
+		  .test(/\.css|scss|sass$/)
+		  .use('style')
+		  .loader('style-loader')
+		  .end()
+		  .use('css')
+		  .loader('css-loader')
+		  .end();
+	},
 };

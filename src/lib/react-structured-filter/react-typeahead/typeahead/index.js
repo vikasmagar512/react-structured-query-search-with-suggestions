@@ -25,6 +25,7 @@ export default class Typeahead extends Component {
     fuzzySearchKeyAttribute: propTypes.string,
     fuzzySearchIdAttribute: propTypes.string,
     datatype: propTypes.string,
+    dynamicOptions: propTypes.bool,
     disabled: propTypes.bool,
     defaultValue: propTypes.string,
     placeholder: propTypes.string,
@@ -37,6 +38,7 @@ export default class Typeahead extends Component {
     options: [],
     header: "Category",
     datatype: "text",
+    dynamicOptions:false,
     customClasses: {},
     defaultValue: "",
     placeholder: "",
@@ -56,11 +58,13 @@ export default class Typeahead extends Component {
     this.entryRef = null;
     this.selRef = null;
     this.inputRef = null;
+    debugger
     this.state = {
       // The set of all options... Does this need to be state?  I guess for lazy load...
       options: this.props.options,
       header: this.props.header,
       datatype: this.props.datatype,
+      dynamicOptions:this.props.dynamicOptions,
 
       // The currently visible set of options
       visible: this.getOptionsForValue(null, this.props.options),
@@ -77,10 +81,12 @@ export default class Typeahead extends Component {
 
   componentWillReceiveProps(nextProps) {
     this.fuzzySearchKeyAttribute = nextProps.fuzzySearchKeyAttribute || this.props.fuzzySearchKeyAttribute;
+    debugger
     this.setState({
       options: nextProps.options,
       header: nextProps.header,
       datatype: nextProps.datatype,
+      dynamicOptions:nextProps.dynamicOptions,
       visible: nextProps.options
     });
   }
@@ -185,7 +191,7 @@ export default class Typeahead extends Component {
       selection: null,
       entryValue: value
     },()=>{
-      if(this.props.fetchData && this.state.datatype ==='textoptions'){
+      if(this.props.dynamicOptions && this.state.datatype ==='textoptions'){
         this.props.fetchData(value)
       }
     });

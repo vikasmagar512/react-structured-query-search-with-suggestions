@@ -41,7 +41,7 @@ export default class OTokenizer extends Tokenizer {
 
 	handleClickOutside = e => {
 		if (this) {
-			let node = ReactDOM.findDOMNode(this);
+			const node = ReactDOM.findDOMNode(this);
 			if (
 				(node && node.contains(e.target)) ||
 				((e.target && e.target.closest(".typeahead-option")) || e.target.className == "typeahead-token-close")
@@ -391,6 +391,7 @@ export default class OTokenizer extends Tokenizer {
 				onOptionSelected={this._addTokenForValue}
 				onKeyDown={this._onKeyDown}
 				fromTokenizer={true}
+				dynamicOptions={this._getIsFetchDynamicOptions()}
 				fetchData={(searchString)=>{this.props.fetchData(this.state.category, searchString)}}
 			/>
 		);

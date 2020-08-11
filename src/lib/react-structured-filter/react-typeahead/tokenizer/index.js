@@ -146,6 +146,14 @@ export default class TypeaheadTokenizer extends Component {
     }
   }
 
+  _getIsFetchDynamicOptions(){
+    for (var i = 0; i < this.props.options.length; i++) {
+      if (this.props.options[i].category == this.state.category) {
+        return this.props.options[i].dynamicOptions;
+      }
+    }
+  }
+
   _onKeyDown = event => {
     // We only care about intercepting backspaces
     if (event.keyCode !== KeyEvent.DOM_VK_BACK_SPACE) {

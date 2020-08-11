@@ -9,44 +9,57 @@ export default class App extends Component {
 		// NOTE: The operator will seen to UI only if props isAllowOperator={true}
 		this.state={
 			options :[
-			{
-				category: "Date",
-				type: "date",
-				isAllowDuplicateCategories: false,
-				operator: () => ["=", "!="]
-			},
-			{
-				category: "Symbol",
-				type: "textoptions",
-				operator: ["==", "!="],
-				options: ['example1', 'example2']
-			},
-			{ category: "Price", type: "number" },
-			{ category: "MarketCap", type: "number" },
-			{ category: "IPO", type: "date" },
-			{
-				category: "Sector",
-				type: "textoptions",
-				fuzzySearchKeyAttribute: "sectorName",
-				isAllowCustomValue: false,
-				isAllowDuplicateOptions: false,
-				options: this.getSectorOptions
-			},
-			{
-				category: "Industry",
-				type: "textoptions",
-				isAllowCustomValue: false,
-				options: this.getIndustryOptions
-			}
-		]
-	}
-	this.searchCharacters = this.searchCharacters.bind(this)
-
+				{
+					category: "Date",
+					type: "date",
+					isAllowDuplicateCategories: false,
+					operator: () => ["=", "!="]
+				},
+				{
+					category: "Symbol",
+					type: "textoptions",
+					operator: ["==", "!="],
+					options: ['example1', 'example2'],
+					dynamicOptions:true
+				},
+				{
+					category: "Non Dynamic",
+					type: "textoptions",
+					operator: ["==", "!="],
+					options: ['example1', 'example2'],
+				},
+				{ category: "Price", type: "number" },
+				{ category: "MarketCap", type: "number" },
+				{ category: "IPO", type: "date" },
+				{
+					category: "Sector",
+					type: "textoptions",
+					fuzzySearchKeyAttribute: "sectorName",
+					isAllowCustomValue: false,
+					isAllowDuplicateOptions: false,
+					options: this.getSectorOptions
+				},
+				{
+					category: "Industry",
+					type: "textoptions",
+					isAllowCustomValue: false,
+					options: this.getIndustryOptions
+				}
+			]
+		}
+		this.searchCharacters = this.searchCharacters.bind(this)
 	}
 
 	// API search function
 	searchCharacters(category, search) {
 		const searchTerm = search !=='' ? search : 'demo'
+		const option = this.state.options.find(item=>{
+			return item.category===category
+		})
+		if(!option.dynamicOptions){
+			return option.options
+		}
+		
 		fetch(
 		`https://api.github.com/search/users?q=${searchTerm}`,
 		{
@@ -91,11 +104,13 @@ export default class App extends Component {
 		return (
 			<div className="container">
 				<ReactStructuredQuerySearch
+					placeholder={'Search'}
 					defaultSelected={[
 						{ category: "Sector", value: { sectorName: "Finance", id: 1 } },
 						{ category: "Sector", value: { sectorName: "Consumer Services", id: 2 } },
 						{ category: "Industry", value: { name: "Other Specialty Stores", id: 2 } }
 					]}
+					isAllowOperator={true}
 					options={this.state.options}
 					//renderTokenItem={this.getTokenItem}
 					updateOptions={({ updatedValues, addedValue }) => {

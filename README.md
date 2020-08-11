@@ -84,6 +84,7 @@ import "react-structured-query-search-with-suggestions/dist/index.css";
 | :new: **renderTokens** | `function` || Allows user to render custome Token Component|
 | :new: **renderTokenItem** | `function` || Allows user to render custome Token Item |
 | :new: **renderSearchItem** | `function` || Allows user to render custome value |
+| :new: **fetchData** | `function` | [] | Allows user to fetch dynamic suggestions(options). (Required if any of the options has `type:"textoptions"` and `dynamicOptions:true`) |
 | **onKeyDown** | `Function`||Event handler for the `keyDown` event on the typeahead input.|
 | **onKeyPress** | `Function`||Event handler for the `keyPress` event on the typeahead input.|
 | **onKeyUp** | `Function`||Event handler for the `keyUp` event on the typeahead input.|
@@ -95,9 +96,10 @@ import "react-structured-query-search-with-suggestions/dist/index.css";
 | Parameter | Type | Default | Required | Description|
 |:---------|:---- |:---- |:--------|:----------- | 
 | **category** | `String` ||`required` | Name of the first thing the user types.|
-| **type** | `String` |`text`||This can be one of the following:<ul><li><b>text</b>: Arbitrary text for the value. No autocomplete options.<ul><li>Operator choices will be: "==", "!=", "contains", "!contains".</li></ul> </li><li><b>textoptions</b>: You must additionally pass an <tt>options</tt> value</tt>. <ul><li>Operator choices will be: "==", "!=".</li></ul></li><li><b>number</b>: Arbitrary text for the value. No autocomplete options.<ul><li>Operator choices will be: "==", "!=", "&lt;", "&lt;=", "&gt;", "&gt;=".</li></ul> </li><li><b>date</b>: Shows a calendar and the input must be of the form "YYYY-MM-DD".<ul><li>Operator choices will be: "==", "!=", "&lt;", "&lt;=", "&gt;", "&gt;=".</li></ul></li></ul>|
+| **type** | `String` |`text`||This can be one of the following:<ul><li><b>text</b>: Arbitrary text for the value. No autocomplete options.<ul><li>Operator choices will be: "==", "!=", "contains", "!contains".</li></ul> </li><li><b>textoptions</b>: You must additionally pass an <tt>options</tt> value</tt>. <ul><li>Operator choices will be: "==", "!=".</li></ul></li><li><b>number</b>: Arbitrary text for the value. No autocomplete options.<ul><li>Operator choices will be: "==", "!=", "&lt;", "&lt;=", "&gt;", "&gt;=".</li></ul> </li><li><b>date</b>: Shows a calendar and user can choose date and time.".<ul><li>Operator choices will be: "==", "!=", "&lt;", "&lt;=", "&gt;", "&gt;=".</li></ul></li></ul>|
 | :new: **operator** | `Array, function` | | required, if  `isAllowOperator` prop is set to `true`| If this attribute is added then it would ignore the type check as described in `type` parameter and it would accept what you have passed|
-| **options** | `Array, function, Promise` | |`required, if type="textoptions"` | Get the value according to selected category |
+| **options** | `Array` | |`required, if type="textoptions"` | Get the value according to selected category |
+| **dynamicOptions** | `Boolean` | false | | A boolean which if set to true, dynamic search suggestions(options) will be loaded using fetchData function. If set to false, static options will be served|
 | :new: **isAllowCustomValue** | `Boolean` |`false`|| <div> When this parameter is set to `true`, it allows you to send multiple custom values for `type=textoptions`</div> |
 | :new: **isAllowDuplicateCategories** | `Boolean` | `true` || Switch between `unique/duplicate` categories (key) |
 | :new: **isAllowDuplicateOptions** | `Boolean` | `false` ||Switch between `unique/duplicate` values |

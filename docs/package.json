@@ -11,10 +11,11 @@
   "license": "MIT",
   "devDependencies": {
     "docz": "^1.2.0",
-    "docz-theme-default": "^1.2.0"
+    "docz-theme-default": "^1.2.0",
+    "css-loader": "^2.1.0",
+    "style-loader": "^0.23.1"
   },
   "dependencies": {
-    "react-structured-query-search-with-suggestions": "file:..",
     "@babel/core": "^7.0.0",
     "@babel/plugin-proposal-class-properties": "^7.0.0",
     "@babel/plugin-proposal-decorators": "^7.0.0",
@@ -32,8 +33,12 @@
     "@babel/plugin-proposal-throw-expressions": "^7.0.0",
     "@babel/plugin-syntax-dynamic-import": "^7.0.0",
     "@babel/plugin-syntax-import-meta": "^7.0.0",
+    "babel-loader": "^8.1.0",
     "babel-preset-react": "^6.24.1",
     "babel-preset-stage-0": "^6.24.1",
-    "babel-upgrade": "^1.0.1"
+    "babel-upgrade": "^1.0.1",
+    "docz-plugin-css": "^0.11.0",
+    "react-hot-loader": "^4.12.21",
+    "react-structured-query-search-with-suggestions": "file:.."
   }
 }
